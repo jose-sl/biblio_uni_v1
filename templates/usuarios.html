@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Usuarios</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+
+<header>
+    <h1>Gestión de Usuarios</h1>
+</header>
+
+<div class="container">
+
+    <a href="{{ url_for('usuarios.agregar_usuario') }}"
+       class="btn btn-primary">
+        Agregar Usuario
+    </a>
+
+    <br><br>
+
+    <div class="table-wrapper">
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Carnet</th>
+                    <th>Correo</th>
+                    <th>Rol</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for usuario in usuarios %}
+                <tr>
+
+                    <td>{{ usuario.id }}</td>
+                    <td>{{ usuario.nombre }}</td>
+                    <td>{{ usuario.carnet }}</td>
+                    <td>{{ usuario.correo }}</td>
+                    <td>{{ usuario.rol }}</td>
+                    <td>{{ usuario.estado }}</td>
+
+                    <td>
+
+                        <a href="{{ url_for('usuarios.editar_usuario', id=usuario.id) }}"
+                           class="btn btn-primary">
+                            Editar
+                        </a>
+
+                        <a href="{{ url_for('usuarios.eliminar_usuario', id=usuario.id) }}"
+                           class="btn btn-danger"
+                           onclick="return confirm('¿Eliminar usuario?')">
+                            Eliminar
+                        </a>
+
+                    </td>
+
+                </tr>
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <br>
+
+    <a href="{{ url_for('dashboard.inicio') }}"
+       class="btn btn-secondary">
+        Volver al Dashboard
+    </a>
+
+</div>
+
+</body>
+</html>

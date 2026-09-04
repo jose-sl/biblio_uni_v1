@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Agregar Usuario</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+
+<header>
+    <h1>Agregar Usuario</h1>
+</header>
+
+<div class="container">
+
+    <div class="form-card">
+
+        <form method="POST">
+
+            <div class="form-group">
+                <label>Nombre Completo</label>
+                <input type="text"
+                       name="nombre"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label>Carnet</label>
+                <input type="text"
+                       name="carnet"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label>Correo Electrónico</label>
+                <input type="email"
+                       name="correo"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label>Contraseña</label>
+                <input type="password"
+                       name="password"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label>Rol</label>
+
+                <select name="rol">
+                    <option value="Administrador">Administrador</option>
+                    <option value="Bibliotecario">Bibliotecario</option>
+                    <option value="Estudiante">Estudiante</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Estado</label>
+
+                <select name="estado">
+                    <option value="Activo">Activo</option>
+                    <option value="Inactivo">Inactivo</option>
+                </select>
+            </div>
+
+            <div class="form-actions">
+
+                <button type="submit"
+                        class="btn btn-primary">
+                    Guardar
+                </button>
+
+                <a href="{{ url_for('usuarios.listar_usuarios') }}"
+                   class="btn btn-secondary">
+                    Cancelar
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

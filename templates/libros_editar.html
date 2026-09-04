@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Libro</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+
+<header>
+    <h1>Editar Libro</h1>
+</header>
+
+<div class="container">
+
+    <div class="form-card">
+
+        <form method="POST">
+
+            <div class="form-group">
+
+                <label>Título del Libro</label>
+
+                <input
+                    type="text"
+                    name="titulo"
+                    value="{{ libro.titulo }}"
+                    required>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>ISBN</label>
+
+                <input
+                    type="text"
+                    name="isbn"
+                    value="{{ libro.isbn }}"
+                    required>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Año de Publicación</label>
+
+                <input
+                    type="number"
+                    name="anio_publicacion"
+                    value="{{ libro.anio_publicacion }}"
+                    min="1900"
+                    max="2100"
+                    required>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Autor</label>
+
+                <select
+                    name="id_autor"
+                    required>
+
+                    {% for autor in autores %}
+
+                    <option
+                        value="{{ autor.id }}"
+                        {% if autor.id == libro.id_autor %}
+                        selected
+                        {% endif %}>
+
+                        {{ autor.nombre }}
+
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Categoría</label>
+
+                <select
+                    name="id_categoria"
+                    required>
+
+                    {% for categoria in categorias %}
+
+                    <option
+                        value="{{ categoria.id }}"
+                        {% if categoria.id == libro.id_categoria %}
+                        selected
+                        {% endif %}>
+
+                        {{ categoria.nombre }}
+
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Cantidad Total</label>
+
+                <input
+                    type="number"
+                    name="cantidad_total"
+                    value="{{ libro.cantidad_total }}"
+                    min="1"
+                    required>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Cantidad Disponible</label>
+
+                <input
+                    type="number"
+                    name="cantidad_disponible"
+                    value="{{ libro.cantidad_disponible }}"
+                    min="0"
+                    required>
+
+            </div>
+
+            <div class="form-actions">
+
+                <button
+                    type="submit"
+                    class="btn btn-primary">
+
+                    Actualizar
+
+                </button>
+
+                <a href="{{ url_for('libros.listar_libros') }}"
+                   class="btn btn-secondary">
+
+                    Cancelar
+
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

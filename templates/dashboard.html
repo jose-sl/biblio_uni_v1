@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Biblioteca Universitaria</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+
+<header>
+
+    <div class="header-content">
+
+        <div>
+
+            <h1>
+                Sistema Biblioteca Universitaria
+            </h1>
+
+        </div>
+
+        <div class="user-info">
+
+            <span>
+                {{ nombre }} ({{ rol }})
+            </span>
+
+            <a href="{{ url_for('logout') }}"
+               class="btn btn-danger">
+
+                Cerrar Sesión
+
+            </a>
+
+        </div>
+
+    </div>
+
+</header>
+
+<div class="container">
+
+    <div class="dashboard-title">
+
+        <h2>
+            Panel Principal
+        </h2>
+
+        <p>
+            Bienvenido al sistema de administración de biblioteca universitaria.
+        </p>
+
+    </div>
+
+    <!-- RESUMEN -->
+
+    <div class="dashboard-cards">
+
+        <div class="dashboard-card">
+
+            <h3>{{ total_libros }}</h3>
+
+            <p>
+                Libros Registrados
+            </p>
+
+        </div>
+
+        <div class="dashboard-card">
+
+            <h3>{{ total_usuarios }}</h3>
+
+            <p>
+                Usuarios Registrados
+            </p>
+
+        </div>
+
+        <div class="dashboard-card">
+
+            <h3>{{ prestamos_activos }}</h3>
+
+            <p>
+                Préstamos Activos
+            </p>
+
+        </div>
+
+        <div class="dashboard-card">
+
+            <h3>{{ total_devoluciones }}</h3>
+
+            <p>
+                Devoluciones
+            </p>
+
+        </div>
+
+        <div class="dashboard-card">
+
+            <h3>{{ multas_pendientes }}</h3>
+
+            <p>
+                Multas Pendientes
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- MENÚ -->
+
+    <div class="card-container">
+
+        <a href="{{ url_for('libros.listar_libros') }}"
+           class="card-link">
+
+            <div class="card">
+
+                <div class="card-icon">📚</div>
+
+                <h3>Libros</h3>
+
+                <p>
+                    Administración del catálogo bibliográfico.
+                </p>
+
+            </div>
+
+        </a>
+
+        <a href="{{ url_for('usuarios.listar_usuarios') }}"
+           class="card-link">
+
+            <div class="card">
+
+                <div class="card-icon">👥</div>
+
+                <h3>Usuarios</h3>
+
+                <p>
+                    Gestión de usuarios del sistema.
+                </p>
+
+            </div>
+
+        </a>
+
+        <a href="{{ url_for('categorias.listar_categorias') }}"
+           class="card-link">
+
+            <div class="card">
+
+                <div class="card-icon">🏷️</div>
+
+                <h3>Categorías</h3>
+
+                <p>
+                    Clasificación de libros.
+                </p>
+
+            </div>
+
+        </a>
+
+        <a href="{{ url_for('autores.listar_autores') }}"
+           class="card-link">
+
+            <div class="card">
+
+                <div class="card-icon">✍️</div>
+
+                <h3>Autores</h3>
+
+                <p>
+                    Administración de autores.
+                </p>
+
+            </div>
+
+        </a>
+
+        <a href="{{ url_for('prestamos.listar_prestamos') }}"
+           class="card-link">
+
+            <div class="card">
+
+                <div class="card-icon">📖</div>
+
+                <h3>Préstamos</h3>
+
+                <p>
+                    Registro de préstamos.
+                </p>
+
+            </div>
+
+        </a>
+
+        <a href="{{ url_for('devoluciones.listar_devoluciones') }}"
+           class="card-link">
+
+            <div class="card">
+
+                <div class="card-icon">↩️</div>
+
+                <h3>Devoluciones</h3>
+
+                <p>
+                    Registro de devoluciones.
+                </p>
+
+            </div>
+
+        </a>
+
+        <a href="{{ url_for('multas.listar_multas') }}"
+           class="card-link">
+
+            <div class="card">
+
+                <div class="card-icon">💰</div>
+
+                <h3>Multas</h3>
+
+                <p>
+                    Control de multas pendientes.
+                </p>
+
+            </div>
+
+        </a>
+
+    </div>
+
+    <!-- PRÉSTAMOS RECIENTES -->
+
+    <div class="alertas-section">
+
+        <h2>
+            Últimos Préstamos Registrados
+        </h2>
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+                        <th>Libro</th>
+                        <th>Usuario</th>
+                        <th>Fecha Préstamo</th>
+                        <th>Fecha Límite</th>
+                        <th>Estado</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for prestamo in prestamos_recientes %}
+
+                    <tr>
+
+                        <td>{{ prestamo.id_prestamo }}</td>
+
+                        <td>{{ prestamo.titulo }}</td>
+
+                        <td>{{ prestamo.nombre }}</td>
+
+                        <td>
+                            {{ prestamo.fecha_prestamo.strftime('%d/%m/%Y') }}
+                        </td>
+
+                        <td>
+                            {{ prestamo.fecha_limite.strftime('%d/%m/%Y') }}
+                        </td>
+
+                        <td>
+
+                            {% if prestamo.estado == 'Prestado' %}
+
+                                <span class="badge badge-warning">
+                                    Prestado
+                                </span>
+
+                            {% elif prestamo.estado == 'Devuelto' %}
+
+                                <span class="badge badge-success">
+                                    Devuelto
+                                </span>
+
+                            {% else %}
+
+                                <span class="badge badge-danger">
+                                    Atrasado
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

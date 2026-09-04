@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Usuario</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+
+<header>
+    <h1>Editar Usuario</h1>
+</header>
+
+<div class="container">
+
+    <div class="form-card">
+
+        <form method="POST">
+
+            <div class="form-group">
+                <label>Nombre Completo</label>
+                <input type="text"
+                       name="nombre"
+                       value="{{ usuario.nombre }}"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label>Carnet</label>
+                <input type="text"
+                       name="carnet"
+                       value="{{ usuario.carnet }}"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label>Correo</label>
+                <input type="email"
+                       name="correo"
+                       value="{{ usuario.correo }}"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label>Rol</label>
+
+                <select name="rol">
+
+                    <option value="Administrador"
+                        {% if usuario.rol == 'Administrador' %}selected{% endif %}>
+                        Administrador
+                    </option>
+
+                    <option value="Bibliotecario"
+                        {% if usuario.rol == 'Bibliotecario' %}selected{% endif %}>
+                        Bibliotecario
+                    </option>
+
+                    <option value="Estudiante"
+                        {% if usuario.rol == 'Estudiante' %}selected{% endif %}>
+                        Estudiante
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div class="form-group">
+                <label>Estado</label>
+
+                <select name="estado">
+
+                    <option value="Activo"
+                        {% if usuario.estado == 'Activo' %}selected{% endif %}>
+                        Activo
+                    </option>
+
+                    <option value="Inactivo"
+                        {% if usuario.estado == 'Inactivo' %}selected{% endif %}>
+                        Inactivo
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div class="form-actions">
+
+                <button type="submit"
+                        class="btn btn-primary">
+                    Actualizar
+                </button>
+
+                <a href="{{ url_for('usuarios.listar_usuarios') }}"
+                   class="btn btn-secondary">
+                    Cancelar
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>
