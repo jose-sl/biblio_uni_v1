@@ -11,7 +11,15 @@
 <body>
 
 <header>
-    <h1>Editar Libro</h1>
+
+    <div class="header-content">
+
+        <h1>
+            Editar Libro
+        </h1>
+
+    </div>
+
 </header>
 
 <div class="container">
@@ -22,19 +30,9 @@
 
             <div class="form-group">
 
-                <label>Título del Libro</label>
-
-                <input
-                    type="text"
-                    name="titulo"
-                    value="{{ libro.titulo }}"
-                    required>
-
-            </div>
-
-            <div class="form-group">
-
-                <label>ISBN</label>
+                <label>
+                    ISBN
+                </label>
 
                 <input
                     type="text"
@@ -46,21 +44,51 @@
 
             <div class="form-group">
 
-                <label>Año de Publicación</label>
+                <label>
+                    Título
+                </label>
 
                 <input
-                    type="number"
-                    name="anio_publicacion"
-                    value="{{ libro.anio_publicacion }}"
-                    min="1900"
-                    max="2100"
+                    type="text"
+                    name="titulo"
+                    value="{{ libro.titulo }}"
                     required>
 
             </div>
 
             <div class="form-group">
 
-                <label>Autor</label>
+                <label>
+                    Editorial
+                </label>
+
+                <input
+                    type="text"
+                    name="editorial"
+                    value="{{ libro.editorial }}">
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+                    Año de Publicación
+                </label>
+
+                <input
+                    type="number"
+                    name="anio_publicacion"
+                    value="{{ libro.anio_publicacion }}"
+                    min="1900"
+                    max="2100">
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+                    Autor
+                </label>
 
                 <select
                     name="id_autor"
@@ -86,7 +114,9 @@
 
             <div class="form-group">
 
-                <label>Categoría</label>
+                <label>
+                    Categoría
+                </label>
 
                 <select
                     name="id_categoria"
@@ -112,12 +142,14 @@
 
             <div class="form-group">
 
-                <label>Cantidad Total</label>
+                <label>
+                    Ejemplares Totales
+                </label>
 
                 <input
                     type="number"
-                    name="cantidad_total"
-                    value="{{ libro.cantidad_total }}"
+                    name="ejemplares_totales"
+                    value="{{ libro.ejemplares_totales }}"
                     min="1"
                     required>
 
@@ -125,14 +157,57 @@
 
             <div class="form-group">
 
-                <label>Cantidad Disponible</label>
+                <label>
+                    Ejemplares Disponibles
+                </label>
 
                 <input
                     type="number"
-                    name="cantidad_disponible"
-                    value="{{ libro.cantidad_disponible }}"
+                    name="ejemplares_disponibles"
+                    value="{{ libro.ejemplares_disponibles }}"
                     min="0"
                     required>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+                    Ubicación
+                </label>
+
+                <input
+                    type="text"
+                    name="ubicacion"
+                    value="{{ libro.ubicacion }}">
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+                    Estado
+                </label>
+
+                <select name="estado">
+
+                    <option
+                        value="Disponible"
+                        {% if libro.estado == 'Disponible' %}
+                        selected
+                        {% endif %}>
+                        Disponible
+                    </option>
+
+                    <option
+                        value="No Disponible"
+                        {% if libro.estado == 'No Disponible' %}
+                        selected
+                        {% endif %}>
+                        No Disponible
+                    </option>
+
+                </select>
 
             </div>
 

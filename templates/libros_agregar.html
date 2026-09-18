@@ -11,7 +11,15 @@
 <body>
 
 <header>
-    <h1>Agregar Libro</h1>
+
+    <div class="header-content">
+
+        <h1>
+            Agregar Libro
+        </h1>
+
+    </div>
+
 </header>
 
 <div class="container">
@@ -22,18 +30,9 @@
 
             <div class="form-group">
 
-                <label>Título del Libro</label>
-
-                <input
-                    type="text"
-                    name="titulo"
-                    required>
-
-            </div>
-
-            <div class="form-group">
-
-                <label>ISBN</label>
+                <label>
+                    ISBN
+                </label>
 
                 <input
                     type="text"
@@ -44,20 +43,48 @@
 
             <div class="form-group">
 
-                <label>Año de Publicación</label>
+                <label>
+                    Título
+                </label>
 
                 <input
-                    type="number"
-                    name="anio_publicacion"
-                    min="1900"
-                    max="2100"
+                    type="text"
+                    name="titulo"
                     required>
 
             </div>
 
             <div class="form-group">
 
-                <label>Autor</label>
+                <label>
+                    Editorial
+                </label>
+
+                <input
+                    type="text"
+                    name="editorial">
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+                    Año de Publicación
+                </label>
+
+                <input
+                    type="number"
+                    name="anio_publicacion"
+                    min="1900"
+                    max="2100">
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+                    Autor
+                </label>
 
                 <select
                     name="id_autor"
@@ -81,7 +108,9 @@
 
             <div class="form-group">
 
-                <label>Categoría</label>
+                <label>
+                    Categoría
+                </label>
 
                 <select
                     name="id_categoria"
@@ -105,25 +134,64 @@
 
             <div class="form-group">
 
-                <label>Cantidad Total</label>
+                <label>
+                    Ejemplares Totales
+                </label>
 
                 <input
                     type="number"
-                    name="cantidad_total"
+                    name="ejemplares_totales"
                     min="1"
+                    value="1"
                     required>
 
             </div>
 
             <div class="form-group">
 
-                <label>Cantidad Disponible</label>
+                <label>
+                    Ejemplares Disponibles
+                </label>
 
                 <input
                     type="number"
-                    name="cantidad_disponible"
+                    name="ejemplares_disponibles"
                     min="0"
+                    value="1"
                     required>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+                    Ubicación
+                </label>
+
+                <input
+                    type="text"
+                    name="ubicacion"
+                    placeholder="Ej. Estante A-01">
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+                    Estado
+                </label>
+
+                <select name="estado">
+
+                    <option value="Disponible" selected>
+                        Disponible
+                    </option>
+
+                    <option value="No Disponible">
+                        No Disponible
+                    </option>
+
+                </select>
 
             </div>
 
